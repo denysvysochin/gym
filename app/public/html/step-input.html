@@ -1,0 +1,24 @@
+<div>
+    <form>
+        <div>
+
+            <div>
+                <label for="name">Name</label>
+                <input id="name" ng-model="session.name" ng-disabled="disabled" type="text">
+            </div>
+            <div>
+                <label for="numbers">Numbers</label>
+                <input id="numbers" ng-model="session.numbers" ng-disabled="disabled" type="number">
+            </div>
+            <div>
+                <label for="time">Time</label>
+                <input id="time" ng-model="session.time" ng-disabled="disabled" type="number">
+            </div>
+            <div>
+                <label for="weight">Weight</label>
+                <input id="weight" ng-model="session.weight" ng-disabled="disabled" type="number">
+            </div>
+        </div>
+        <button ng-click="start()">Start step</button>
+    </form>
+</div>

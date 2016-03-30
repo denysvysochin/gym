@@ -1,0 +1,10 @@
+<div>
+    New Session
+
+    <ul ng-repeat="step in session.steps">
+        <li>
+            <step-input step="step"></step-input>
+        </li>
+    </ul>
+    <button ng-click="addNewStep()">Add step</button>
+</div>

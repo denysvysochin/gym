@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="GymApp">
+    <head>
+        <meta charset="UTF-8">
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
+        <script src="libs/angular-ui-rout.min.js"></script>
+        <script src="js/index.js"></script>
+        <title>Gym Helper</title>
+    </head>
+    <body>
+        <div>
+            <div ng-controller="MainController">
+
+                <form>
+                    <button ng-click="newSession()">Start</button>
+                </form>
+            </div>
+
+            <div class="container">
+                <div ui-view></div>
+            </div>
+        </div>
+
+    </body>
+</html>
