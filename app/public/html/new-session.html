@@ -1,10 +1,16 @@
-<div>
-    New Session
+<div class="center">
+    <div class="session-input-container">
+        <h2 class="text-center">New Session</h2>
 
-    <ul ng-repeat="step in session.steps">
-        <li>
-            <step-input step="step"></step-input>
-        </li>
-    </ul>
-    <button ng-click="addNewStep()">Add step</button>
+        <ul ng-repeat="step in session.steps">
+            <div class="step-input-container">
+                <li>
+                    <h3>Task {{$index+1}}</h3>
+                    <step-input step="step"></step-input>
+                </li>
+            </div>
+        </ul>
+        <button ng-click="addNewStep()">Add step</button>
+        <button class="btn btn-danger btn-lg btn-block" ng-click="finish()">FINISH SESSION</button>
+    </div>
 </div>

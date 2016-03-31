@@ -1,0 +1,31 @@
+.session-input-container {
+    width: 500px;
+}
+
+.step-input-container {
+    background-color: #71EA51;
+    border-radius: 30px;
+    padding: 20px 40px 30px 40px;
+}
+
+.step-form-input {
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+.center {
+    display: table;
+    margin: 0 auto;
+}
+
+body {
+    background-image: url("http://www.magic4walls.com/wp-content/uploads/2015/08/start-running-sports.jpg");
+    background-repeat: no-repeat;
+    background-position: center top;
+}
+
+ul {
+    padding: 0;
+}
+.main-container {
+
+}

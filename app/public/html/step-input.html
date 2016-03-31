@@ -1,24 +1,30 @@
-<div>
-    <form>
-        <div>
 
-            <div>
-                <label for="name">Name</label>
-                <input id="name" ng-model="session.name" ng-disabled="disabled" type="text">
+    <form role="form">
+        <div class="form-group">
+
+            <div class="row step-form-input">
+                <label class="col-md-4 control-label" for="exercise">Name</label>
+                <input class="col-md-7 from-control input-sm" id="exercise" ng-disabled="step.isDisabled" ng-model="step.exercise" ng-disabled="disabled" type="text">
             </div>
-            <div>
-                <label for="numbers">Numbers</label>
-                <input id="numbers" ng-model="session.numbers" ng-disabled="disabled" type="number">
+
+            <select name="singleSelect" ng-model="step.exercise">
+                <option value="option-1">Option 1</option>
+            </select>
+
+            <div class="row step-form-input">
+                <label class="col-md-4" for="numbers">Numbers</label>
+                <input class="col-md-7 from-control input-sm" id="numbers" ng-disabled="step.isDisabled" ng-model="step.numbers" ng-disabled="disabled" type="number">
             </div>
-            <div>
-                <label for="time">Time</label>
-                <input id="time" ng-model="session.time" ng-disabled="disabled" type="number">
+            <div class="row step-form-input">
+                <label class="col-md-4" for="time">Time</label>
+                <input class="col-md-7 from-control input-sm" id="time" ng-disabled="step.isDisabled" ng-model="step.time" ng-disabled="disabled" type="number">
             </div>
-            <div>
-                <label for="weight">Weight</label>
-                <input id="weight" ng-model="session.weight" ng-disabled="disabled" type="number">
+            <div class="row step-form-input">
+                <label class="col-md-4" for="weight">Weight</label>
+                <input class="col-md-7 from-control input-sm" id="weight" ng-disabled="step.isDisabled" ng-model="step.weight" ng-disabled="disabled" type="number">
             </div>
         </div>
-        <button ng-click="start()">Start step</button>
+        <button class="btn btn-success btn-lg btn-block" ng-click="start()" ng-show="step.state == States.NEW">START</button>
+        <button class="btn btn-danger btn-lg btn-block" ng-click="stop()" ng-show="step.state == States.STARTED">STOP</button>
+        <button class="btn btn-default btn-lg btn-block" ng-show="step.state == States.FINISHED" ng-disabled="true">FINISHED</button>
     </form>
-</div>
