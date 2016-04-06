@@ -1,0 +1,125 @@
+<div>
+
+    <div class="sessions-title">Date over time</div>
+
+    <div class="overTimeContainer">
+        <table class="session-table" bordercolor="black" border="2" align="center">
+            <tr>
+                <th>Workout step</th>
+                <th colspan="3" ng-repeat-start="session in sessions" ng-repeat-end>{{months[session.date.getMonth()]}} {{session.date.getDate()}}th</th>
+            </tr>
+            <tr ng-repeat="obj in tableObjects">
+                <td>{{obj.exercise}}</td>
+                <td ng-repeat-start="day in obj.days">{{day.numbers}}</td>
+                <td>{{obj.days[$index].weight}}</td>
+                <td ng-repeat-end>{{obj.days[$index].time}}</td>
+            </tr>
+        </table>
+        <div class="row">
+            <div class="col-md-4">
+                <canvas id="benchPressN" class="chart chart-line" chart-data="benchPressDataN"
+                        chart-labels="benchPressLabelsN" chart-legend="true" chart-series="benchPressNSeries" ng-show="true">
+                </canvas>
+            </div>
+            <div class="col-md-4">
+                <canvas id="benchPressW" class="chart chart-line" chart-data="benchPressDataW"
+                        chart-labels="benchPressLabelsW" chart-legend="true" chart-series="benchPressWSeries" ng-show="true">
+                </canvas>
+            </div>
+            <div class="col-md-4">
+                <canvas id="benchPressT" class="chart chart-line" chart-data="benchPressDataT"
+                        chart-labels="benchPressLabelsT" chart-legend="true" chart-series="benchPressTSeries" ng-show="true">
+                </canvas>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <canvas id="pressN" class="chart chart-line" chart-data="pressDataN"
+                        chart-labels="pressLabelsN" chart-legend="true" chart-series="pressNSeries" ng-show="true">
+                </canvas>
+            </div>
+            <div class="col-md-4">
+                <canvas id="pressW" class="chart chart-line" chart-data="pressDataW"
+                        chart-labels="pressLabelsW" chart-legend="true" chart-series="pressWSeries" ng-show="true">
+                </canvas>
+            </div>
+            <div class="col-md-4">
+                <canvas id="pressT" class="chart chart-line" chart-data="pressDataT"
+                        chart-labels="squatsLabelsT" chart-legend="true" chart-series="pressTSeries" ng-show="true">
+                </canvas>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <canvas id="squatsN" class="chart chart-line" chart-data="squatsDataN"
+                        chart-labels="squatsLabelsN" chart-legend="true" chart-series="squatsNSeries" ng-show="true">
+                </canvas>
+            </div>
+            <div class="col-md-4">
+                <canvas id="squatsW" class="chart chart-line" chart-data="squatsDataW"
+                        chart-labels="squatsLabelsW" chart-legend="true" chart-series="squatsWSeries" ng-show="true">
+                </canvas>
+            </div>
+            <div class="col-md-4">
+                <canvas id="squatsT" class="chart chart-line" chart-data="squatsDataT"
+                        chart-labels="squatsLabelsT" chart-legend="true" chart-series="squatsTSeries" ng-show="true">
+                </canvas>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <canvas id="runN" class="chart chart-line" chart-data="runDataN"
+                        chart-labels="runLabelsN" chart-legend="true" chart-series="runNSeries" ng-show="true">
+                </canvas>
+            </div>
+            <div class="col-md-4">
+                <canvas id="runW" class="chart chart-line" chart-data="runDataW"
+                        chart-labels="runLabelsW" chart-legend="true" chart-series="runWSeries" ng-show="true">
+                </canvas>
+            </div>
+            <div class="col-md-4">
+                <canvas id="runT" class="chart chart-line" chart-data="runDataT"
+                        chart-labels="runLabelsT" chart-legend="true" chart-series="runTSeries" ng-show="true">
+                </canvas>
+            </div>
+        </div>
+    </div>
+
+<!--    <canvas id="benchPressW" class="chart chart-line" chart-data="benchPressDataW"
+            chart-labels="benchPressLabelsW" chart-legend="true" chart-series="series">
+    </canvas>
+    <canvas id="benchPressT" class="chart chart-line" chart-data="benchPressDataT"
+            chart-labels="benchPressLabelsT" chart-legend="true" chart-series="series">
+    </canvas>-->
+
+<!--    <canvas id="pressN" class="chart chart-line" chart-data="pressDataN"
+            chart-labels="pressLabels" chart-legend="true">
+    </canvas>
+    <canvas id="pressW" class="chart chart-line" chart-data="pressDataW"
+            chart-labels="pressLabels" chart-legend="true">
+    </canvas>
+    <canvas id="press" class="chart chart-line" chart-data="pressData"
+            chart-labels="pressLabels" chart-legend="true">
+    </canvas>
+
+    <canvas id="squatsN" class="chart chart-line" chart-data="squatsDataN"
+            chart-labels="squatsLabels" chart-legend="true">
+    </canvas>
+    <canvas id="squatsW" class="chart chart-line" chart-data="squatsDataW"
+            chart-labels="squatsLabelsW" chart-legend="true">
+    </canvas>
+    <canvas id="squats" class="chart chart-line" chart-data="squatsData"
+            chart-labels="squatsLabels" chart-legend="true">
+    </canvas>
+
+    <canvas id="runN" class="chart chart-line" chart-data="runDataN"
+            chart-labels="runLabels" chart-legend="true">
+    </canvas>
+    <canvas id="run" class="chart chart-line" chart-data="runData"
+            chart-labels="runLabels" chart-legend="true">
+    </canvas>
+    <canvas id="run" class="chart chart-line" chart-data="runData"
+            chart-labels="runLabels" chart-legend="true">
+    </canvas>-->
+
+</div>

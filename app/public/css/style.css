@@ -10,15 +10,20 @@
 
 .step-form-input {
     margin-bottom: 5px;
-    margin-top: 5px;
+    margin-top: 10px;
 }
 .center {
     display: table;
     margin: 0 auto;
 }
 
+.session-table {
+    text-align: center;
+}
+
 body {
-    background-image: url("http://www.magic4walls.com/wp-content/uploads/2015/08/start-running-sports.jpg");
+    /*background-image: url("http://www.magic4walls.com/wp-content/uploads/2015/08/start-running-sports.jpg");*/
+    background-image: url("http://www.selectsport.nl/skin/frontend/default/selectsport/images/bg-winter.jpg");
     background-repeat: no-repeat;
     background-position: center top;
 }
@@ -28,4 +33,46 @@ ul {
 }
 .main-container {
 
+}
+
+.session-btn {
+    margin-bottom: 20px;
+}
+
+#timepicker2 {
+    width: 262.5px;
+}
+
+.start-new-session-btn {
+    width: 300px;
+    margin-bottom: 30px;
+
+}
+
+.sessions-title {
+    text-align: center;
+    font-weight: bold;
+    font-size: 40px;
+}
+
+.gym-header {
+    font-weight: bold;
+    font-size: 50px;
+    color: black;
+    /*background-image: url("images/123.jpg");*/
+    text-align: center;
+    border-radius: 15px;
+    margin-left: 40px;
+    margin-right: 40px;
+}
+
+.overTimeContainer{
+    background-color: white;
+    min-height: 100px;
+    border-radius: 15px;
+    padding: 20px 40px 30px 40px;
+}
+
+td {
+    min-width: 50px;
 }
