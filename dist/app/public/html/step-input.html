@@ -1,0 +1,71 @@
+
+<form role="form" novalidate>
+    <div class="form-group" id="1234">
+        <div class="alert alert-danger" ng-show="isError">
+            <strong>Attention!</strong> You must to fill at least 1 field.
+        </div>
+        <div class="row step-form-input">
+            <label class="col-md-4 control-label" for="exercise">Exercise:</label>
+            <!--<input class="col-md-7 from-control input-sm" id="exercise" ng-disabled="step.isDisabled" ng-model="step.exercise" ng-disabled="disabled" type="text">-->
+            <select id="exercise" class="col-md-7 from-control input-sm" name="singleSelect" ng-model="step.exercise" ng-disabled="step.isForecastDisabled" ng-options="exercise for exercise in Exercises">
+                <!--                <div ng-repeat="exercise in Exercises">
+                                    <option value="{{exercise}}">{{exercise}}</option>
+                                </div>-->
+            </select>
+        </div>
+
+
+
+        <div class="row step-form-input" ng-show="step.isNumberIncluded">
+            <label class="col-md-4" for="numbersF">Forecast Number:</label>
+            <input class="col-md-7 from-control input-sm" id="numbersF" ng-disabled="step.isForecastDisabled" ng-model="step.forecastNumbers" type="number" min="1">
+        </div>
+        <div class="row step-form-input" ng-show="step.isTimeIncluded">
+            <label class="col-md-4" for="step{{step.id}}">Forecast Time:</label>
+<!--
+            <input class="col-md-7 from-control input-sm" id="timeF" ng-disabled="step.isForecastDisabled" ng-model="step.forecastTime" type="number">
+-->
+
+            <input type="time"  placeholder="MM:SS" id="step{{step.id}}" class="col-md-7 from-control input-sm" ng-model="step.forecastTime" step="1">
+
+                <!--<div id="step{{step.id}}" class="input-append col-md-7">
+                    <input data-format="hh:mm:ss" type="text" class="from-control input-sm" ng-model="forecastTime"/>
+                    <span class="add-on">
+                      <i data-time-icon="glyphicon-time"></i>
+                    </span>
+                </div>-->
+
+        </div>
+        <div class="row step-form-input" ng-show="step.isWeightIncluded">
+            <label class="col-md-4" for="weightF">Forecast Weight:</label>
+            <input class="col-md-7 from-control input-sm" id="weightF" ng-disabled="step.isForecastDisabled" ng-model="step.forecastWeight" type="number" min="1">
+        </div>
+        <hr ng-show="step.isActualVisible">
+        <div class="row step-form-input" ng-show="step.isActualVisible && step.isNumberIncluded">
+            <label class="col-md-4" for="numbersA">Actual Number:</label>
+            <input class="col-md-7 from-control input-sm" id="numbersA" ng-disabled="step.isActualDisabled" ng-model="step.actualNumbers" type="number" min="1">
+        </div>
+        <div class="row step-form-input" ng-show="step.isActualVisible && step.isTimeIncluded">
+            <label class="col-md-4" for="step{{step.id}}A">Actual Time:</label>
+            <input type="time" placeholder="HH:mm:ss" id="step{{step.id}}A" class="col-md-7 from-control input-sm" ng-model="step.actualTime" step="1">
+        </div>
+        <div class="row step-form-input" ng-show="step.isActualVisible && step.isWeightIncluded">
+            <label class="col-md-4" for="weightA">Actual Weight:</label>
+            <input class="col-md-7 from-control input-sm" id="weightA" ng-disabled="step.isActualDisabled" ng-model="step.actualWeight" type="number" min="1">
+        </div>
+    </div>
+
+    <button class="btn btn-success btn-lg btn-block" ng-click="start()" ng-show="step.state == States.NEW">START</button>
+    <button class="btn btn-danger btn-lg btn-block" ng-click="stop()" ng-show="step.state == States.STARTED">STOP <span ng-bind="minutes"></span>:<span ng-bind="seconds"></span> <img src="images/spinner.gif" width="20" height="20"/></button>
+    <button class="btn btn-primary btn-lg btn-block" ng-click="finish()" ng-show="step.state == States.STOPPED">FINISH STEP</button>
+    <button class="btn btn-default btn-lg btn-block" ng-show="step.state == States.FINISHED" ng-disabled="true">FINISHED</button>
+</form>
+<!--
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#datetimepicker3').datetimepicker({
+            pickDate: false
+        });
+    });
+
+</script>-->

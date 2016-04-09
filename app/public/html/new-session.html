@@ -1,9 +1,32 @@
 <div class="center">
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Please, choice settings from this list or create new</h4>
+                </div>
+                <div class="modal-body">
+                    <button class="btn btn-primary" data-dismiss="modal" ng-click="addNewStep()">Create New</button>
+                    <h3>List of settings</h3>
+                    <ul ng-repeat="savedStep in savedSteps">
+                        <a ng-click="addNewStep(savedStep)" data-dismiss="modal">Exercise: {{savedStep.exercise}} Number: {{savedStep.number}} Time: {{savedStep.time}} Weight: {{savedStep.weight}}</a>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
     <div class="session-input-container">
         <div class="sessions-title">New Session</div>
 
         <button class="btn btn-danger btn-lg btn-block session-btn" ng-click="finishSession()">FINISH SESSION</button>
-        <button class="btn btn-warning btn-lg btn-block session-btn" ng-click="addNewStep()">ADD STEP</button>
+        <button type="button" data-toggle="modal" data-target="#myModal" class="btn btn-warning btn-lg btn-block session-btn">ADD STEP</button>
 
         <ul ng-repeat="step in session.steps">
             <div class="step-input-container">

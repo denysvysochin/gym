@@ -1,4 +1,5 @@
-
+//import 'babel-polyfill';
+//import MainController from './modules/mainController'
 var gymApp = angular.module('GymApp', ['ui.router', 'LocalStorageModule', 'chart.js'/*, 'ui.bootstrap'/*, 'chart.js'*/]);
 
 gymApp.config(function($stateProvider, $urlRouterProvider, localStorageServiceProvider) {
@@ -53,12 +54,30 @@ gymApp.factory('cacheManager', ['$cacheFactory', 'localStorageService', function
             }
         },
 
+        getSavedSteps : function () {
+            if (localStorageService.get('savedSteps')) {
+                return localStorageService.get('savedSteps');
+            } else {
+                return [];
+            }
+        },
+
         saveSession: function (newSession) {
             var sessions = this.getAllSessions();
             newSession.id = sessions.length;
             sessions.push(newSession);
             localStorageService.set('sessions', sessions);
             console.log();
+        },
+
+        saveStep : function (step) {
+            var savedSteps = localStorageService.get('savedSteps');
+            if (savedSteps) {
+                savedSteps.push(step);
+                localStorageService.set('savedSteps', savedSteps);
+            } else {
+                localStorageService.set('savedSteps', [step]);
+            }
         },
 
         clearCache: function () {
@@ -69,6 +88,8 @@ gymApp.factory('cacheManager', ['$cacheFactory', 'localStorageService', function
 
     return cacheManager
 }]);
+
+//gymApp.controller('MainController', ['$scope', '$state', '$cacheFactory', 'cacheManager', MainController]);
 
 gymApp.controller('MainController', ['$scope', '$state', '$cacheFactory', 'cacheManager', function ($scope, $state, $cacheFactory, cacheManager) {
     $scope.cache = $cacheFactory('cacheId');
@@ -91,6 +112,8 @@ gymApp.controller('MainController', ['$scope', '$state', '$cacheFactory', 'cache
         $state.go("dataOverTime");
     };
 }]);
+
+
 
 gymApp.controller('SessionsController', ['$scope', '$state', '$cacheFactory', 'cacheManager',function ($scope, $state, $cacheFactory, cacheManager) {
 
@@ -256,18 +279,26 @@ gymApp.controller('DataOverTimeController', ['$scope', '$state', 'cacheManager',
 gymApp.controller('NewSessionController', ['$scope', '$state', '$cacheFactory', 'cacheManager',function ($scope, $state, $cacheFactory, cacheManager) {
     $scope.cache = $cacheFactory.get('cacheId');
     $scope.session = new Session();
+    $scope.savedSteps = cacheManager.getSavedSteps();
 
-    $scope.createStep = function () {
+    $scope.createStep = function (savedStep) {
         var step = new Step();
+        if (savedStep) {
+            step.exercise = savedStep.exercise;
+            step.forecastNumbers = savedStep.number;
+            step.forecastTime = savedStep.time ? new Date(savedStep.time) : 0;
+            step.forecastWeight = savedStep.weight;
+            step.isNewStep = false;
+        }
         step.id = $scope.session.steps.length != -1 ? $scope.session.steps.length+1 : 1;
         return step;
     };
 
-    $scope.session.steps.push($scope.createStep());
+    //$scope.session.steps.push($scope.createStep());
     //$scope.session.steps.push(new Step());
 
-    $scope.addNewStep = function () {
-        $scope.session.steps.unshift($scope.createStep());
+    $scope.addNewStep = function (step) {
+        $scope.session.steps.unshift($scope.createStep(step));
     };
 
     $scope.finishSession = function () {
@@ -277,7 +308,7 @@ gymApp.controller('NewSessionController', ['$scope', '$state', '$cacheFactory', 
                 isValid = false;
             }
         });
-        if (isValid) {
+        if (isValid && $scope.session.steps.length > 0) {
             cacheManager.saveSession($scope.session);
             $scope.home();
         } else {
@@ -386,7 +417,7 @@ gymApp.directive('stepInput', function () {
             step: '='
         },
         templateUrl: 'html/step-input.html',
-        controller: ['$scope', '$state', '$cacheFactory', function ($scope, $stat, $cacheFactory) {
+        controller: ['$scope', '$state', '$cacheFactory', 'cacheManager' , function ($scope, $stat, $cacheFactory, cacheManager) {
             $scope.parent = {forecastTime : ''}
             $scope.cache = $cacheFactory.get('cacheId');
             $scope.States = Statuses;
@@ -426,6 +457,15 @@ gymApp.directive('stepInput', function () {
                     }
 
                     $scope.step.isForecastDisabled = true;
+
+                    if ($scope.step.isNewStep) {
+                        cacheManager.saveStep({
+                            exercise: $scope.step.exercise,
+                            number: $scope.step.forecastNumbers,
+                            time: $scope.step.forecastTime,
+                            weight: $scope.step.forecastWeight
+                        });
+                    }
                     $scope.step.state = $scope.States.STARTED;
                 }
                 $scope.step.actualTime = new Date('1970-01-01 00:00:00');
@@ -443,7 +483,7 @@ gymApp.directive('stepInput', function () {
                 //if ($scope.step.forecastTime == 0) {
                     $scope.step.actualTime = 0;
                 //}/* else {
-                    //$scope.step.actualTime = String($scope.step.actualTime);
+                    //$scope.step.actualTime = String($scfope.step.actualTime);
                 //}*/
                 clearInterval(startInterval);
                 $scope.step.isActualVisible = true;
@@ -480,6 +520,7 @@ var Session = function () {
 var Step = function () {
 
     this.id = -1;
+    this.isNewStep = true;
     this.exercise = "BENCH PRESS";
     this.forecastNumbers = 0;
     this.forecastTime = 0;

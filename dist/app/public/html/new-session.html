@@ -1,0 +1,18 @@
+<div class="center">
+    <div class="session-input-container">
+        <div class="sessions-title">New Session</div>
+
+        <button class="btn btn-danger btn-lg btn-block session-btn" ng-click="finishSession()">FINISH SESSION</button>
+        <button class="btn btn-warning btn-lg btn-block session-btn" ng-click="addNewStep()">ADD STEP</button>
+
+        <ul ng-repeat="step in session.steps">
+            <div class="step-input-container">
+                <li>
+                    <h3>Step {{step.id}}</h3>
+                    <step-input step="step"></step-input>
+                </li>
+            </div>
+        </ul>
+
+    </div>
+</div>

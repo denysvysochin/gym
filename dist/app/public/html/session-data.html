@@ -1,0 +1,54 @@
+<div>
+    <!--<h2>Session DATA</h2>-->
+
+    <table class="session-table" bordercolor="black" border="2" align="center">
+        <tr>
+            <th>Workout step</th>
+            <th>Planned Number</th>
+            <th>Actual Number</th>
+            <th>Difference Number</th>
+            <th>Planned Weight</th>
+            <th>Actual Weight</th>
+            <th>Difference Weight</th>
+            <th>Planned Time</th>
+            <th>Actual Time</th>
+            <th>Difference Time</th>
+        </tr>
+        <tr ng-repeat="step in session.steps">
+            <td>{{step.exercise}}</td>
+            <td>{{step.forecastNumbers}}</td>
+            <td>{{step.actualNumbers}}</td>
+            <td>{{step.numberDiff}}%</td>
+            <td>{{step.forecastWeight}}</td>
+            <td>{{step.actualWeight}}</td>
+            <!--<td>{{step.}}</td>-->
+            <td>{{step.weightDiff}}%</td>
+
+
+            <td>{{step.forecastTime}}</td>
+            <td>{{step.actualTime}}</td>
+            <!--<td>{{step.}}</td>-->
+            <td>{{step.timeDiff}}%</td>
+        </tr>
+    </table>
+    <ul ng-repeat="chartStep in chartSteps">
+        <div class="row">
+            <div class="col-md-4">
+                <canvas id="numberBar+chartStep.id" class="chart chart-bar"
+                        chart-data="chartStep.numberData" chart-labels="numberLabels"> chart-series="series"
+                </canvas>
+            </div>
+            <div class="col-md-4">
+                <canvas id="weightBar+chartStep.id" class="chart chart-bar"
+                        chart-data="chartStep.weightData" chart-labels="weightLabels"> chart-series="series"
+                </canvas>
+            </div>
+            <div class="col-md-4">
+                <canvas id="timeBar+chartStep.id" class="chart chart-bar"
+                        chart-data="chartStep.timeData" chart-labels="timeLabels"> chart-series="series"
+                </canvas>
+            </div>
+        </div>
+    </ul>
+
+</div>
