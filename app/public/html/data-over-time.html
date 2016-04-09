@@ -6,7 +6,7 @@
         <table class="session-table" bordercolor="black" border="2" align="center">
             <tr>
                 <th>Workout step</th>
-                <th colspan="3" ng-repeat-start="session in sessions" ng-repeat-end>{{months[session.date.getMonth()]}} {{session.date.getDate()}}th</th>
+                <th colspan="{{3*session.steps.length}}" ng-repeat-start="session in sessions" ng-repeat-end>{{months[session.date.getMonth()]}} {{session.date.getDate()}}th</th>
             </tr>
             <tr ng-repeat="obj in tableObjects">
                 <td>{{obj.exercise}}</td>

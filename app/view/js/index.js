@@ -114,8 +114,8 @@ gymApp.controller('DataOverTimeController', ['$scope', '$state', 'cacheManager',
 
     $scope.sessions = cacheManager.getAllSessions();
 
-    if ($scope.sessions.length > 7) {
-        $scope.sessions = $scope.sessions.slice($scope.session.length-6, $scope.session.length);
+    if ($scope.sessions.length > 3) {
+        $scope.sessions = $scope.sessions.slice($scope.session.length-2, $scope.session.length);
     }
     $scope.tableObjects = [];
     //$scope.sessions.reverse();
@@ -207,7 +207,7 @@ gymApp.controller('DataOverTimeController', ['$scope', '$state', 'cacheManager',
             }
             if (step.actualTime && step.exercise == "BENCH PRESS") {
                 $scope.benchPressLabelsT.push($scope.months[session.date.getMonth()] + " " + session.date.getDate()+"th");
-                $scope.benchPressDataT[0].push([step.actualTime]);
+                $scope.benchPressDataT[0].push([new Date(step.actualTime).getTime()/60000]);
             }
 
             if (step.actualNumbers && step.exercise == "PRESS") {
@@ -220,7 +220,7 @@ gymApp.controller('DataOverTimeController', ['$scope', '$state', 'cacheManager',
             }
             if (step.actualTime && step.exercise == "PRESS") {
                 $scope.pressLabelsT.push($scope.months[session.date.getMonth()] + " " + session.date.getDate()+"th");
-                $scope.pressDataT[0].push([step.actualTime]);
+                $scope.pressDataT[0].push([new Date(step.actualTime).getTime()/60000]);
             }
 
 
@@ -234,7 +234,7 @@ gymApp.controller('DataOverTimeController', ['$scope', '$state', 'cacheManager',
             }
             if (step.actualTime && step.exercise == "SQUATS") {
                 $scope.squatsLabelsT.push($scope.months[session.date.getMonth()] + " " + session.date.getDate()+"th");
-                $scope.squatsDataT[0].push([step.actualTime]);
+                $scope.squatsDataT[0].push([new Date(step.actualTime).getTime()/60000]);
             }
 
             if (step.actualNumbers && step.exercise == "RUN") {
@@ -247,7 +247,7 @@ gymApp.controller('DataOverTimeController', ['$scope', '$state', 'cacheManager',
             }
             if (step.actualTime && step.exercise == "RUN") {
                 $scope.runLabelsT.push($scope.months[session.date.getMonth()] + " " + session.date.getDate()+"th");
-                $scope.runDataT[0].push([step.actualTime]);
+                $scope.runDataT[0].push([new Date(step.actualTime).getTime()/60000]);
             }
         })
     });
@@ -299,7 +299,9 @@ gymApp.directive('sessionData', function () {
         templateUrl: 'html/session-data.html',
         controller: ['$scope', '$state', 'cacheManager', function ($scope, $stat, cacheManager){
 
-            $scope.session.steps.forEach(function (step) {
+            $scope.chartSteps = [];
+
+            $scope.session.steps.forEach(function (step, i) {
                 if(step.forecastNumbers == 0) {
                     step.forecastNumbers = "-";
                     step.actualNumbers = "-";
@@ -341,6 +343,23 @@ gymApp.directive('sessionData', function () {
                 $scope.timeLabels = ['Time'];
                 $scope.series = ['Series A', 'Series B'];
 
+                $scope.chartSteps.push({
+                    id: $scope.session.id+'char'+step.id+'Chart',
+                    numberData: [
+                        [step.forecastNumbers],
+                        [step.actualNumbers]
+                    ],
+                    weightData: [
+                        [step.forecastWeight],
+                        [step.actualWeight]
+                    ],
+                    timeData: [
+                        [totalSecF],
+                        [totalSecA]
+                    ]
+                });
+
+/*
                 $scope.numberData = [
                     [step.forecastNumbers],
                     [step.actualNumbers]
@@ -352,7 +371,7 @@ gymApp.directive('sessionData', function () {
                 $scope.timeData = [
                     [totalSecF],
                     [totalSecA]
-                ];
+                ];*/
             });
 
 

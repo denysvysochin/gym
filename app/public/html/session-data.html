@@ -31,21 +31,24 @@
             <td>{{step.timeDiff}}%</td>
         </tr>
     </table>
-    <div class="row">
-        <div class="col-md-4">
-            <canvas id="numberBar" class="chart chart-bar"
-                    chart-data="numberData" chart-labels="numberLabels"> chart-series="series"
-            </canvas>
+    <ul ng-repeat="chartStep in chartSteps">
+        <div class="row">
+            <div class="col-md-4">
+                <canvas id="numberBar+chartStep.id" class="chart chart-bar"
+                        chart-data="chartStep.numberData" chart-labels="numberLabels"> chart-series="series"
+                </canvas>
+            </div>
+            <div class="col-md-4">
+                <canvas id="weightBar+chartStep.id" class="chart chart-bar"
+                        chart-data="chartStep.weightData" chart-labels="weightLabels"> chart-series="series"
+                </canvas>
+            </div>
+            <div class="col-md-4">
+                <canvas id="timeBar+chartStep.id" class="chart chart-bar"
+                        chart-data="chartStep.timeData" chart-labels="timeLabels"> chart-series="series"
+                </canvas>
+            </div>
         </div>
-        <div class="col-md-4">
-            <canvas id="weightBar" class="chart chart-bar"
-                    chart-data="weightData" chart-labels="weightLabels"> chart-series="series"
-            </canvas>
-        </div>
-        <div class="col-md-4">
-            <canvas id="timeBar" class="chart chart-bar"
-                    chart-data="timeData" chart-labels="timeLabels"> chart-series="series"
-            </canvas>
-        </div>
-    </div>
+    </ul>
+
 </div>
